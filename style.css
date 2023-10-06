@@ -1,0 +1,105 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color:blueviolet; /* Change the background color */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+#clear-button {
+    background-color: #f2f2f2;
+    border: 1px solid #ccc;
+    padding: 5px 10px;
+    cursor: pointer;
+}
+.btns{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+.container {
+    max-width: 400px;
+    padding: 20px;
+    border-radius: 9px;
+    box-shadow: 10 0 10px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    color: #fff;
+    background-color:  rgb(40, 40, 41);
+}
+
+h1 {
+    margin-top: 0;
+    font-size:80px ;
+text-align:left;
+}
+.form {
+    margin: 20px;
+}
+#messageiput{
+    border-bottom: 2px solid black;
+}
+
+input[type="text"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    
+}
+
+button {
+    padding: 10px 20px;
+    background-color: #007BFF;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.qr-code {
+    margin-top: 20px;
+}
+
+img {
+    max-width: 100%;
+    margin-bottom: 15px;
+}
+
+.download{
+    background-color: #007BFF;
+    padding: 5px 25px;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+/* Responsive Styles */
+
+@media screen and (max-width: 600px) {
+    .container {
+        max-width: 100%;
+        border-radius: 0;
+    }
+    
+    .form {
+        padding: 10px;
+    }
+    
+    input[type="text"] {
+        margin-bottom: 5px;
+    }
+    
+    button {
+        padding: 8px 16px;
+    }
+    
+    .qr-code {
+        margin-top: 10px;
+    }
+}
+ 
