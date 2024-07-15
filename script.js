@@ -1,9 +1,8 @@
 const messageInput = document.getElementById("messageInput");
 const generateBtn = document.getElementById("generateBtn");
 const qrImg = document.getElementById("qrImg");
-const download = document.getElementById("download");
-const qr_code = document.getElementById("qr-code");
-const clear = document.getElementById("clear")
+const qrCodeContainer = document.getElementById("qr-code");
+const clearBtn = document.getElementById("clear");
 
 generateBtn.addEventListener("click", generateQRCode);
 messageInput.addEventListener("keyup", function (event) {
@@ -11,7 +10,8 @@ messageInput.addEventListener("keyup", function (event) {
         generateQRCode();
     }
 });
-let img;
+clearBtn.addEventListener("click", clearInput);
+
 function generateQRCode() {
     const message = messageInput.value.trim();
     if (!message) {
@@ -20,22 +20,39 @@ function generateQRCode() {
         const qrCodeUrl = `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(message)}`;
         qrImg.src = qrCodeUrl;
         
-        // download.setAttribute("href",qrImg.png);
-        //  download.setAttribute("download", qrImg.png);
-         fetch(qrCodeUrl).then((res)=> res.blob()).then((href =>{
-            const objectURL = URL.createObjectURL(href);
-            const link = document.createElement('a');
-            link.href = objectURL;
-            link.download="text_To_Qr";
-            link.textContent = "Download QR";
-            link.className = "download";
-            qr_code.appendChild(link);
-         })) 
+        // Fetch the QR code image and create a download link
+        fetch(qrCodeUrl)
+            .then(res => res.blob())
+            .then(blob => {
+                const objectURL = URL.createObjectURL(blob);
+                const link = document.createElement('a');
+                link.href = objectURL;
+                link.download = "text_To_QR.png";
+                link.textContent = "Download QR";
+                link.className = "download";
+
+                // Clear previous download link if exists
+                const previousLink = qrCodeContainer.querySelector('.download');
+                if (previousLink) {
+                    qrCodeContainer.removeChild(previousLink);
+                }
+
+                qrCodeContainer.appendChild(link);
+            });
+
+        // Clear the input field
+        messageInput.value = "";
     }
 }
 
-
-function clearInput(){
+function clearInput() {
     messageInput.value = "";
-    window.location.reload();
+    qrImg.src = "";
+    
+    // Clear the download link if exists
+    const previousLink = qrCodeContainer.querySelector('.download');
+    if (previousLink) {
+        qrCodeContainer.removeChild(previousLink);
+    }
 }
+
